@@ -1,10 +1,11 @@
 (function() {
     this.amirTemplateEngine = function() {
         var self = this;
+        var _tokensToReplace, _values, _array;
 
         // evaluate in-line expressions
         self.evaluateString = function(string, options) {
-            var _tokensToReplace = string.match(new RegExp(/({{=[^}]*}})/g)) || [];
+            _tokensToReplace = string.match(new RegExp(/({{=[^}]*}})/g)) || [];
 
             _tokensToReplace.map(function(token) {
                 string = string.replace(token, (function() {
@@ -17,11 +18,11 @@
 
         // replace given object
         self.replaceGivenObject = function(string, options) {
-            var values = options && options.values ? options.values : {};
-            var _tokensToReplace = string.match(new RegExp(/({{[ ]*[^}.]+[ ]*}})/g)) || [];
+            _values = options && options.values ? options.values : {};
+            _tokensToReplace = string.match(new RegExp(/({{[ ]*[^}.]+[ ]*}})/g)) || [];
 
             _tokensToReplace.map(function(token) {
-                string = string.replace(token, values[token.replace(" ", "").replace("{{", "").replace("}}", "")]);
+                string = string.replace(token, _values[token.replace(" ", "").replace("{{", "").replace("}}", "")]);
             });
 
             return string;
@@ -29,11 +30,11 @@
 
         // replace given array index
         self.replaceGivenArray = function(string, options) {
-            var array = options && options.array ? options.array : {};
-            var _tokensToReplace = string.match(new RegExp(/({{[ ]*[0-9]+[ ]*}})/g)) || [];
+            _array = options && options.array ? options.array : {};
+            _tokensToReplace = string.match(new RegExp(/({{[ ]*[0-9]+[ ]*}})/g)) || [];
 
             _tokensToReplace.map(function(token) {
-                string = string.replace(token, options.array[parseInt(token.replace(" ", "").replace("{{", "").replace("}}", ""))]);
+                string = string.replace(token, _array[parseInt(token.replace(" ", "").replace("{{", "").replace("}}", ""))]);
             });
 
             return string;
