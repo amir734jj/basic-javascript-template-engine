@@ -21,3 +21,17 @@ Basic javascript template system
             context: self
         }));
     })();
+
+Result:
+
+    <h2 class='true'>seyed amir hossein</h2>
+    <p>good</p>
+    <p>something else!</p>
+    <p>amir</p>
+
+
+In short:
+
+    {{= expression}} --> evaluates expression (context is optional)
+    {{0}}            --> evaluates based on given array index
+    {{name}}         --> evaluates based on given json values
