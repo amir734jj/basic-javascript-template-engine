@@ -1,4 +1,4 @@
-var colors = require('./amir-template-engine');
+var template = require('./amir-template-engine');
 
 (function() {
     var self = this;
